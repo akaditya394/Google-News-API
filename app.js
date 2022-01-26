@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const axios = require("axios").default;
@@ -25,21 +25,24 @@ app.post("/", (req, res) => {
   axios
     .request(options)
     .then(function (response) {
-      // console.log(response.data);
       const newsHeadlines = response.data;
       const newsTitle = newsHeadlines.articles[0].title;
       const newsLink = newsHeadlines.articles[0].link;
       const publishedDate = newsHeadlines.articles[0].published;
-      console.log(newsTitle);
-      console.log(newsLink);
-      console.log(publishedDate);
-      res.send("Latest news about " + req.body.searchQuery + ". " +newsTitle+ ". "+ publishedDate +". " +newsLink);
+      res.send(
+        "Latest news about " +
+          req.body.searchQuery +
+          ". " +
+          newsTitle +
+          ". " +
+          publishedDate +
+          ". " +
+          newsLink
+      );
     })
     .catch(function (error) {
       console.error(error);
     });
-
-   
 });
 
 app.listen(4000, () => {
